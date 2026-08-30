@@ -16,7 +16,7 @@
     "@angular/core": "^20.0.0",
     "@angular/forms": "^20.0.0",
     "@angular/platform-browser": "^20.0.0",
-    "@angular/router": "^20.0.0",
+    "@angular/router": "^22.1.4",
     "@ngrx/store": "^19.0.0",
     "@ngrx/effects": "^19.0.0",
     "@ngrx/store-devtools": "^19.0.0",
