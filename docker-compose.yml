@@ -1,0 +1,58 @@
+name: pecuni
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: pecuni
+      POSTGRES_USER: pecuni
+      POSTGRES_PASSWORD: pecuni
+    ports:
+      - "5432:5432"
+    volumes:
+      - pecuni-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pecuni -d pecuni"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    image: maven:3.9-eclipse-temurin-21
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - pecuni-maven-cache:/root/.m2
+    # Uses the container's own Maven install rather than a wrapper script,
+    # so nobody needs Maven installed on the host to run the project.
+    command: mvn spring-boot:run -Dspring-boot.run.profiles=local
+    environment:
+      # Overrides application-local.yml's "localhost" default: from inside
+      # this container, Postgres is reachable at the service name "db", not
+      # localhost. Spring Boot's relaxed binding maps this env var straight
+      # onto spring.datasource.url — no extra profile needed for Docker.
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/pecuni
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - pecuni-frontend-node-modules:/app/node_modules
+    # --poll: file-change events from a bind mount aren't always reliable
+    # inside a container, especially on macOS/Windows Docker Desktop.
+    command: sh -c "npm install && npm start -- --host 0.0.0.0 --poll 1000"
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+
+volumes:
+  pecuni-db-data:
+  pecuni-maven-cache:
+  pecuni-frontend-node-modules:

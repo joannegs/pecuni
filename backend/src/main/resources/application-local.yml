@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pecuni
+    username: pecuni
+    password: pecuni
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    com.pecuni: DEBUG
+    org.hibernate.SQL: DEBUG
+
+pecuni:
+  jwt:
+    # local-only secret — never reused in test/prod, see application-prod.yml
+    secret: local-dev-secret-do-not-use-in-production-please-change-me

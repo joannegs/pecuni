@@ -1,0 +1,21 @@
+name: Feature request
+description: Propose new functionality or a change of scope
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What's the feature?
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: MoSCoW priority
+      options:
+        - Must have
+        - Should have
+        - Could have
+        - Won't have (this MVP)
+    validations:
+      required: true

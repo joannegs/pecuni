@@ -1,0 +1,16 @@
+# Datasource URL/credentials are NOT set here — they're injected at runtime via
+# @DynamicPropertySource pointing at the Testcontainers Postgres instance
+# (see the base integration test class, added in week 3 of the work plan).
+# This keeps a single source of truth for the container's connection info.
+
+spring:
+  jpa:
+    show-sql: false
+
+logging:
+  level:
+    com.pecuni: INFO
+
+pecuni:
+  jwt:
+    secret: test-secret-fixed-value-for-deterministic-tests
