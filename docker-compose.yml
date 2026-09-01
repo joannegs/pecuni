@@ -32,8 +32,10 @@ services:
       # localhost. Spring Boot's relaxed binding maps this env var straight
       # onto spring.datasource.url — no extra profile needed for Docker.
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/pecuni
+    # 8081, not 8080: the local profile (run here via -Dspring-boot.run.profiles=local)
+    # overrides server.port to 8081 in application-local.yml.
     ports:
-      - "8080:8080"
+      - "8081:8081"
     depends_on:
       db:
         condition: service_healthy

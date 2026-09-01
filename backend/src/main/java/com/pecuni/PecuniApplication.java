@@ -2,10 +2,12 @@ package com.pecuni;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableScheduling // required later for recurring-transaction generation (week 5 of the work plan)
+@EnableScheduling
+@ConfigurationPropertiesScan
 public class PecuniApplication {
 
     public static void main(String[] args) {

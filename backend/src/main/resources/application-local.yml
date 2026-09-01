@@ -1,3 +1,6 @@
+server:
+  port: 8081 # 8080 conflicts with a local Apache (httpd) already running on this machine
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/pecuni
@@ -18,3 +21,7 @@ pecuni:
   jwt:
     # local-only secret — never reused in test/prod, see application-prod.yml
     secret: local-dev-secret-do-not-use-in-production-please-change-me
+  google:
+    # replace with a real OAuth2 client ID from Google Cloud Console to exercise
+    # /auth/login/google manually against the real Google servers
+    client-id: local-dev-client-id.apps.googleusercontent.com
