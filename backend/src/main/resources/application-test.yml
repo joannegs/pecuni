@@ -14,3 +14,7 @@ logging:
 pecuni:
   jwt:
     secret: test-secret-fixed-value-for-deterministic-tests
+  google:
+    # never resolved against real Google servers in tests — GoogleTokenVerifier
+    # is mocked at the controller-integration level, and unit-tested in isolation
+    client-id: test-client-id

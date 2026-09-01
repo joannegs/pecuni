@@ -1,6 +1,10 @@
 spring:
   application:
     name: pecuni-backend
+  profiles:
+    # only applies when no profile is active anywhere else (IDE run config,
+    # @ActiveProfiles, SPRING_PROFILES_ACTIVE) — safe fallback for local dev
+    default: local
   jpa:
     open-in-view: false # avoid lazy-loading surprises leaking into the web layer
     hibernate:
@@ -28,8 +32,9 @@ management:
       exposure:
         include: health,info
 
-# Custom app properties (bound via @ConfigurationProperties later)
 pecuni:
   jwt:
     access-token-ttl-minutes: 15
     refresh-token-ttl-days: 7
+  google:
+    client-id: ${GOOGLE_CLIENT_ID:}

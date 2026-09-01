@@ -9,7 +9,7 @@ backend, Angular 20 frontend, PostgreSQL.
 docker compose up
 ```
 
-That's the entire setup: Postgres, backend (`localhost:8080`, Swagger at
+The entire setup: Postgres, backend (`localhost:8081`, Swagger at
 `/docs`) and frontend (`localhost:4200`) all start together, with source
 mounted for hot reload on both sides.
 

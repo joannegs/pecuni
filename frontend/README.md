@@ -21,4 +21,4 @@ npm install
 npm start
 ```
 
-Requires the backend running on `http://localhost:8080` or the root `docker-compose.yml` once it exists.
+Requires the backend running on `http://localhost:8081` or the root `docker-compose.yml` once it exists.
