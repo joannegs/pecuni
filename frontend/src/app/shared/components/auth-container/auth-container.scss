@@ -1,0 +1,46 @@
+@use '../../../../styles/variables' as vars;
+
+.auth-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: #fff;
+
+  &__visual {
+    flex: 1 1 50%;
+    height: 100%;
+    display: none;
+    background: vars.$color-cream;
+
+    @media (min-width: 900px) {
+      display: block;
+    }
+  }
+
+  &__visual-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__panel {
+    flex: 1 1 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+  }
+
+  &__panel-content {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  &__logo {
+    display: block;
+    height: 40px;
+    width: auto;
+    margin: 0 auto 40px;
+  }
+}

@@ -1,0 +1,52 @@
+<app-auth-container>
+  <div class="signup__header">
+    <h1 class="signup__title">Create your account</h1>
+    <p class="signup__subtitle">Sign up to start managing your finances with Pecuni</p>
+  </div>
+
+  <form class="signup__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="signup__field">
+      <label class="signup__label" for="fullName">Full name</label>
+      <div class="signup__input-wrap">
+        <svg class="signup__input-icon" lucideUser [size]="16"></svg>
+        <input class="signup__input" id="fullName" type="text" formControlName="fullName" autocomplete="name" />
+      </div>
+    </div>
+
+    <div class="signup__field">
+      <label class="signup__label" for="email">E-mail</label>
+      <div class="signup__input-wrap">
+        <svg class="signup__input-icon" lucideMail [size]="16"></svg>
+        <input class="signup__input" id="email" type="email" formControlName="email" autocomplete="email" />
+      </div>
+    </div>
+
+    <div class="signup__field">
+      <label class="signup__label" for="password">Password</label>
+      <div class="signup__input-wrap">
+        <svg class="signup__input-icon" lucideLock [size]="16"></svg>
+        <input class="signup__input" id="password" type="password" formControlName="password" autocomplete="new-password" />
+      </div>
+      <p class="signup__hint">Use at least 8 characters with letters, numbers and symbols</p>
+    </div>
+
+    <button type="submit" class="signup__button signup__button--primary">Create an account</button>
+
+    <div class="signup__divider"><span class="signup__divider-text">or signup with</span></div>
+
+    <div class="signup__social-row">
+      <button type="button" class="signup__button signup__button--social">
+        <img class="signup__social-icon" src="assets/images/google-logo.png" alt="" />
+        Google
+      </button>
+      <button type="button" class="signup__button signup__button--social">
+        <img class="signup__social-icon" src="assets/images/apple-logo.png" alt="" />
+        Apple
+      </button>
+    </div>
+
+    <p class="signup__footer">
+      Already have an account? <a class="signup__link" routerLink="/login">Login</a>
+    </p>
+  </form>
+</app-auth-container>

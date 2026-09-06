@@ -1,8 +1,13 @@
-/* Global styles. Design tokens / theme variables land here once the UI
-   direction is defined — intentionally minimal at the skeleton stage. */
+@use 'styles/variables' as *;
 
 html, body {
   margin: 0;
   height: 100%;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: $font-body;
+  background-color: $color-cream;
+  color: $color-charcoal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
 }
