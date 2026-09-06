@@ -90,12 +90,26 @@
     }
   }
 
+  &__error {
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: rgba(#b3261e, 0.08);
+    color: #b3261e;
+    font-size: 13px;
+  }
+
   &__button {
     height: 46px;
     border-radius: 8px;
     font-family: vars.$font-body;
     font-size: 15px;
     cursor: pointer;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
 
     &--primary {
       border: none;
@@ -156,6 +170,12 @@
   &__social-row {
     display: flex;
     gap: 12px;
+  }
+
+  &__google-button {
+    flex: 1;
+    display: flex;
+    justify-content: center;
   }
 
   &__footer {

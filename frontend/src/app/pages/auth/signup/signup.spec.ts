@@ -1,4 +1,8 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { GoogleIdentityService } from '../../../core/services/google-identity.service';
 
 import { Signup } from './signup';
 
@@ -7,8 +11,17 @@ describe('Signup', () => {
   let fixture: ComponentFixture<Signup>;
 
   beforeEach(async () => {
+    const googleIdentitySpy = jasmine.createSpyObj<GoogleIdentityService>('GoogleIdentityService', ['renderButton']);
+    googleIdentitySpy.renderButton.and.resolveTo();
+
     await TestBed.configureTestingModule({
-      imports: [Signup]
+      imports: [Signup],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([]),
+        { provide: GoogleIdentityService, useValue: googleIdentitySpy },
+      ],
     })
     .compileComponents();
 

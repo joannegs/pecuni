@@ -30,15 +30,18 @@
       <p class="signup__hint">Use at least 8 characters with letters, numbers and symbols</p>
     </div>
 
-    <button type="submit" class="signup__button signup__button--primary">Create an account</button>
+    @if (errorMessage()) {
+      <p class="signup__error">{{ errorMessage() }}</p>
+    }
+
+    <button type="submit" class="signup__button signup__button--primary" [disabled]="submitting()">
+      {{ submitting() ? 'Creating account…' : 'Create an account' }}
+    </button>
 
     <div class="signup__divider"><span class="signup__divider-text">or signup with</span></div>
 
     <div class="signup__social-row">
-      <button type="button" class="signup__button signup__button--social">
-        <img class="signup__social-icon" src="assets/images/google-logo.png" alt="" />
-        Google
-      </button>
+      <div class="signup__google-button" #googleButton></div>
       <button type="button" class="signup__button signup__button--social">
         <img class="signup__social-icon" src="assets/images/apple-logo.png" alt="" />
         Apple

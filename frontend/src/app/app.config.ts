@@ -1,13 +1,9 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { provideStore } from '@ngrx/store';
-import { provideEffects } from '@ngrx/effects';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
-import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,10 +15,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(withInterceptors([authInterceptor])),
 
-    // Feature stores are registered per lazy-loaded route via provideState()
-    // as each feature is implemented (starting week 2 — auth).
-    provideStore(),
-    provideEffects(),
-    provideStoreDevtools({ maxAge: 25, logOnly: environment.production }),
+    // No global store provider: state management is signals-based per
+    // feature/service (see README — "Deliberate decisions"). @ngrx/signals
+    // is pulled in for when a feature needs shared, non-trivial state
+    // (dashboard, transactions) but isn't wired up anywhere yet.
   ],
 };

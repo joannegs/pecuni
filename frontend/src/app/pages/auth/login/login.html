@@ -24,19 +24,18 @@
       <button type="button" class="login__link">Forgot my password</button>
     </div>
 
-    <button type="submit" class="login__button login__button--primary">Login</button>
+    @if (errorMessage()) {
+      <p class="login__error">{{ errorMessage() }}</p>
+    }
+
+    <button type="submit" class="login__button login__button--primary" [disabled]="submitting()">
+      {{ submitting() ? 'Signing in…' : 'Login' }}
+    </button>
 
     <div class="login__divider"><span class="login__divider-text">or continue with</span></div>
 
     <div class="login__social-row">
-      <button type="button" class="login__button login__button--social">
-        <img class="login__social-icon" src="assets/images/google-logo.png" alt="" />
-        Google
-      </button>
-      <button type="button" class="login__button login__button--social">
-        <img class="login__social-icon" src="assets/images/apple-logo.png" alt="" />
-        Apple
-      </button>
+      <div class="login__google-button" #googleButton></div>
     </div>
 
     <p class="login__signup">
