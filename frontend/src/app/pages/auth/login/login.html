@@ -12,10 +12,13 @@
       <label class="login__label" for="password">Password</label>
       <div class="login__input-wrap">
         <svg class="login__input-icon" lucideLock [size]="16"></svg>
-        <input class="login__input" id="password" type="password" formControlName="password" autocomplete="current-password" />
+        <input class="login__input" id="password" type="password" formControlName="password"
+          autocomplete="current-password" />
       </div>
     </div>
 
+    <!-- TODO: implement remember me and forgot password -->
+    @if(false) {
     <div class="login__row">
       <label class="login__checkbox">
         <input class="login__checkbox-input" type="checkbox" formControlName="rememberMe" />
@@ -23,9 +26,11 @@
       </label>
       <button type="button" class="login__link">Forgot my password</button>
     </div>
+    }
+
 
     @if (errorMessage()) {
-      <p class="login__error">{{ errorMessage() }}</p>
+    <p class="login__error">{{ errorMessage() }}</p>
     }
 
     <button type="submit" class="login__button login__button--primary" [disabled]="submitting()">

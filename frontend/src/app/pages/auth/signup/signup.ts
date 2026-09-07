@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { LucideLock, LucideMail, LucideUser } from '@lucide/angular';
 import { AuthService } from '../../../core/services/auth.service';
 import { GoogleIdentityService } from '../../../core/services/google-identity.service';
+import { NotificationService } from '../../../core/services/notification.service';
 import { ProblemDetail } from '../../../core/models/problem-detail.model';
 import { AuthContainer } from '../../../shared/components/auth-container/auth-container';
 
@@ -19,6 +20,7 @@ export class Signup implements AfterViewInit {
   private readonly formBuilder = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly googleIdentityService = inject(GoogleIdentityService);
+  private readonly notificationService = inject(NotificationService);
   private readonly router = inject(Router);
 
   private readonly googleButton = viewChild<ElementRef<HTMLElement>>('googleButton');
@@ -40,7 +42,7 @@ export class Signup implements AfterViewInit {
 
     this.googleIdentityService
       .renderButton(container, (idToken) => this.onGoogleCredential(idToken))
-      .catch(() => this.errorMessage.set('Não foi possível carregar o login com Google.'));
+      .catch(() => this.errorMessage.set('Unable to load Google Sign-In. Please try again.'));
   }
 
   protected onSubmit(): void {
@@ -54,10 +56,13 @@ export class Signup implements AfterViewInit {
     this.submitting.set(true);
 
     this.authService.register({ nome: fullName!, email: email!, senha: password! }).subscribe({
-      next: () => this.router.navigateByUrl('/'),
+      next: () => {
+        this.notificationService.success('Account created successfully! Log in to continue.');
+        this.router.navigateByUrl('/login');
+      },
       error: (error: HttpErrorResponse) => {
         const problem = error.error as ProblemDetail | null;
-        this.errorMessage.set(problem?.detail ?? 'Não foi possível criar a conta. Tente novamente.');
+        this.errorMessage.set(problem?.detail ?? '');
         this.submitting.set(false);
       },
     });
@@ -69,7 +74,7 @@ export class Signup implements AfterViewInit {
       next: () => this.router.navigateByUrl('/'),
       error: (error: HttpErrorResponse) => {
         const problem = error.error as ProblemDetail | null;
-        this.errorMessage.set(problem?.detail ?? 'Não foi possível criar a conta. Tente novamente.');
+        this.errorMessage.set(problem?.detail ?? 'Unable to create the account. Please try again.');
         this.submitting.set(false);
       },
     });
